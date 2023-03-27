@@ -4,7 +4,6 @@ var gravity := 30.
 var grabbed := false
 var dashes := 1
 var speed := 5.
-var time_since_dash := 0.
 const jump_velocity := 9.
 var direction := Vector3.ZERO
 var local_input_dir := Vector3.ZERO
@@ -76,21 +75,17 @@ func jump(delta) -> void:
 
 func dash(delta) -> void:
 	if is_on_floor() and not dashes:
-		time_since_dash += delta
-		if time_since_dash > 0.3:
-			dashes += 1
-			dashes = max(dashes, 1)
-			time_since_dash = 0
+		dashes = 1
 	if Input.is_action_pressed("dash") and dashes:
 		dash_charge_time += delta
 		can_move = false
 		direction = Vector3.ZERO
 		gravity = 0
 		velocity = Vector3.ZERO
-	elif dash_charge_time:
+	elif dash_charge_time and dashes:
+		dash_charge_time = 0
 		dashes -= 1
 		direction = local_input_dir * 15
-		dash_charge_time = 0
 		if direction.length():
 			walking_time = 1.0
 		can_move = true
@@ -98,6 +93,7 @@ func dash(delta) -> void:
 
 func grab(delta) -> void:
 	if Input.is_action_pressed("grab") and is_on_wall_only():
+		dashes = 1
 		if not grabbed and velocity.y < 0:
 			velocity = Vector3.ZERO
 			direction = Vector3.ZERO
