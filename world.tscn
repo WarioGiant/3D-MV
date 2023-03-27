@@ -52,6 +52,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.1246, -24.3535)
 size = Vector3(22.1822, 22.753, 1)
 material = SubResource("StandardMaterial3D_mee0e")
 
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(0.280968, 0, 0.959717, 0, 1, 0, -0.959717, 0, 0.280968, 2.41453, 40.5798, 29.219)
+size = Vector3(22.1822, 22.753, 1)
+material = SubResource("StandardMaterial3D_mee0e")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(0.280968, 0, 0.959717, 0, 1, 0, -0.959717, 0, 0.280968, -3.49856, 40.5798, 27.4879)
+size = Vector3(22.1822, 22.753, 1)
+material = SubResource("StandardMaterial3D_mee0e")
+
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38217, 0)
 use_collision = true

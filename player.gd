@@ -54,7 +54,7 @@ func handle_camera(delta) -> void:
 func handle_sprinting(delta) -> void:
 	if Vector2(velocity.x, velocity.z).length() > 4.5:
 		walking_time += delta
-	elif Vector2(velocity.x, velocity.z).length() < 0.001:
+	if Vector2(velocity.x, velocity.z).length() < 0.001 and walking_time:
 		walking_time = 0
 	if walking_time >= 0.75:
 		speed = 9
@@ -92,7 +92,7 @@ func dash(delta) -> void:
 		direction = local_input_dir * 15
 		dash_charge_time = 0
 		if direction.length():
-			walking_time = 1
+			walking_time = 1.0
 		can_move = true
 		gravity = 30.
 
@@ -106,6 +106,7 @@ func grab(delta) -> void:
 			can_move = false
 		if Input.is_action_just_pressed("jump"):
 			can_move = true
+			walking_time = 1.0
 			velocity.y = jump_velocity * 1.5
 			direction += get_wall_normal() * 3
 			gravity = 30.0
@@ -117,7 +118,6 @@ func grab(delta) -> void:
 
 func _process(delta) -> void:
 	handle_camera(delta)
-	handle_sprinting(delta)
 
 func _physics_process(delta) -> void:
 	#Fall
@@ -150,9 +150,11 @@ func _physics_process(delta) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 		
+	handle_sprinting(delta)
 	jump(delta)
 	dash(delta)
 	grab(delta)
+	
 	
 	move_and_slide()
 
