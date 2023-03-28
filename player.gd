@@ -1,21 +1,24 @@
 extends CharacterBody3D
 
 var gravity := 30.
-var friction := 10.
-var grabbed := false
 var dashes := 1
 var speed := 5.
+const max_lock_distance := 30.
 const jump_velocity := 9.
-var direction := Vector3.ZERO
-var local_input_dir := Vector3.ZERO
-var target_node : Node3D
-var locked := false
-var can_move := true
-var gliding := false
+
 var dash_charge_time := 0.
 var jump_timer := 0.
 var walking_time := 0.
-var max_lock_distance := 30.
+
+var direction := Vector3.ZERO
+var local_input_dir := Vector3.ZERO
+var target_node : Node3D
+
+var locked := false
+var grabbed := false
+var gliding := false
+var can_move := true
+
 @onready var body = get_node("body")
 @onready var camera_yaw = get_node("camera_yaw")
 @onready var camera_pitch = get_node("camera_yaw/camera_pitch")
@@ -137,13 +140,11 @@ func _physics_process(delta) -> void:
 	#Glide
 	if (is_on_floor() or grabbed) or (Input.is_action_just_pressed("glide") and gliding):
 		gliding = false
-		friction = 10.0
 	elif Input.is_action_just_pressed("glide"):
-		friction = 2.0
 		gliding = true
 	
-	velocity.x = lerp(velocity.x, direction.x, delta * friction)
-	velocity.z = lerp(velocity.z, direction.z, delta * friction)
+	velocity.x = lerp(velocity.x, direction.x, delta * 10)
+	velocity.z = lerp(velocity.z, direction.z, delta * 10)
 		
 	jump(delta)
 	grab(delta)
