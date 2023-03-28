@@ -105,7 +105,7 @@ func grab(delta) -> void:
 			grabbed = true
 			gravity = 0.0
 			can_move = false
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") and not dash_charge_time:
 			can_move = true
 			walking_time = 1.0
 			velocity.y = jump_velocity * 1.5

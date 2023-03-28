@@ -141,6 +141,7 @@ script = ExtResource("2_cv52i")
 
 [node name="spring" type="SpringArm3D" parent="camera_yaw/camera_pitch"]
 spring_length = 5.0
+margin = 0.0
 
 [node name="camera" type="Camera3D" parent="camera_yaw/camera_pitch/spring"]
 size = 10.0
