@@ -73,28 +73,9 @@ func jump(delta) -> void:
 		jump_timer -= delta
 		jump_timer = max(jump_timer, 0)
 	if is_on_floor():
-		if Input.is_action_just_pressed("jump") or (jump_timer and Input.is_action_pressed("jump")):
+		if (jump_timer and Input.is_action_pressed("jump")):
 			jump_timer = 0
 			velocity.y = jump_velocity
-
-func dash(delta) -> void:
-	if is_on_floor() and not dashes:
-		dashes = 1
-	if Input.is_action_pressed("dash") and dashes:
-		dash_charge_time += delta
-		can_move = false
-		walking_time = 0
-		direction = Vector3.ZERO
-		velocity.y = 0
-		velocity = lerp(velocity, Vector3.ZERO, delta * 5)
-	elif dash_charge_time and dashes:
-		dash_charge_time = 0
-		dashes -= 1
-		velocity = local_input_dir * 135
-		if velocity.length():
-			walking_time = 1.0
-		can_move = true
-		gravity = 30.
 
 func grab(delta) -> void:
 	if Input.is_action_pressed("grab") and is_on_wall_only():
@@ -116,6 +97,25 @@ func grab(delta) -> void:
 		can_move = true
 		grabbed = false
 		gravity = 30.0
+
+func dash(delta) -> void:
+	if is_on_floor() and not dashes:
+		dashes = 1
+	if Input.is_action_pressed("dash") and dashes:
+		dash_charge_time += delta
+		can_move = false
+		walking_time = 0
+		direction = Vector3.ZERO
+		velocity.y = 0
+		velocity = lerp(velocity, Vector3.ZERO, delta * 5)
+	elif dash_charge_time and dashes:
+		dash_charge_time = 0
+		dashes -= 1
+		velocity = local_input_dir * 135
+		if velocity.length():
+			walking_time = 1.0
+		can_move = true
+		gravity = 30.
 
 func _process(delta) -> void:
 	handle_camera(delta)

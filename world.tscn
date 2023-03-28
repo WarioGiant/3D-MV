@@ -17,7 +17,8 @@ ambient_light_source = 3
 tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
-sdfgi_use_occlusion = true
+sdfgi_y_scale = 0
+glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdhay"]
 albedo_texture = ExtResource("2_a758j")
