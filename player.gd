@@ -80,8 +80,10 @@ func dash(delta) -> void:
 	if Input.is_action_pressed("dash") and dashes:
 		dash_charge_time += delta
 		can_move = false
-		gravity = 0
-		velocity = Vector3.ZERO
+		walking_time = 0
+		direction = Vector3.ZERO
+		velocity.y = 0
+		velocity = lerp(velocity, Vector3.ZERO, delta * 5)
 	elif dash_charge_time and dashes:
 		dash_charge_time = 0
 		dashes -= 1
