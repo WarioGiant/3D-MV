@@ -15,6 +15,10 @@ run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 boot_splash/show_image=false
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [input]
 
 jump={
