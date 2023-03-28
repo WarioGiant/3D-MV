@@ -80,7 +80,6 @@ func dash(delta) -> void:
 	if Input.is_action_pressed("dash") and dashes:
 		dash_charge_time += delta
 		can_move = false
-		direction = Vector3.ZERO
 		gravity = 0
 		velocity = Vector3.ZERO
 	elif dash_charge_time and dashes:
@@ -105,7 +104,7 @@ func grab(delta) -> void:
 			can_move = true
 			walking_time = 1.0
 			velocity.y = jump_velocity * 1.5
-			direction += get_wall_normal() * 3
+			velocity += get_wall_normal() * 27
 			gravity = 30.0
 			grabbed = false
 	else:
@@ -134,18 +133,19 @@ func _physics_process(delta) -> void:
 		direction = local_input_dir * speed
 	
 	#Glide
-	if !(is_on_floor() or grabbed):
-		if Input.is_action_just_pressed("glide"):
-			gliding = !gliding
-	else:
+	if (is_on_floor() or grabbed) or (Input.is_action_just_pressed("glide") and gliding):
 		gliding = false
+		friction = 10.0
+	elif Input.is_action_just_pressed("glide"):
+		friction = 2.0
+		gliding = true
 	
 	velocity.x = lerp(velocity.x, direction.x, delta * friction)
 	velocity.z = lerp(velocity.z, direction.z, delta * friction)
 		
-	dash(delta)
 	jump(delta)
 	grab(delta)
+	dash(delta)
 	handle_sprinting(delta)
 	
 	
