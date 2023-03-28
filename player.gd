@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 var gravity := 30.
+var friction := 10.
 var grabbed := false
 var dashes := 1
 var speed := 5.
@@ -85,8 +86,8 @@ func dash(delta) -> void:
 	elif dash_charge_time and dashes:
 		dash_charge_time = 0
 		dashes -= 1
-		direction = local_input_dir * 15
-		if direction.length():
+		velocity = local_input_dir * 135
+		if velocity.length():
 			walking_time = 1.0
 		can_move = true
 		gravity = 30.
@@ -130,7 +131,7 @@ func _physics_process(delta) -> void:
 	var input_dir = Input.get_vector("left", "right", "forward", "backward").normalized()
 	local_input_dir = camera_yaw.transform.basis * Vector3(input_dir.x, 0, input_dir.y)
 	if can_move:
-		direction = lerp(direction, local_input_dir, delta * 10)
+		direction = local_input_dir * speed
 	
 	#Glide
 	if !(is_on_floor() or grabbed):
@@ -139,17 +140,13 @@ func _physics_process(delta) -> void:
 	else:
 		gliding = false
 	
-	if direction.length():
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+	velocity.x = lerp(velocity.x, direction.x, delta * friction)
+	velocity.z = lerp(velocity.z, direction.z, delta * friction)
 		
-	handle_sprinting(delta)
-	jump(delta)
 	dash(delta)
+	jump(delta)
 	grab(delta)
+	handle_sprinting(delta)
 	
 	
 	move_and_slide()
