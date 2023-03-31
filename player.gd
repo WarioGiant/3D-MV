@@ -118,6 +118,9 @@ func dash(delta) -> void:
 		gravity = 30.
 
 func _process(delta) -> void:
+	if Input.is_action_just_pressed("attack"):
+		$AnimationPlayer.play("attack1")
+		$AnimationPlayer.queue("RESET")
 	handle_camera(delta)
 
 func _physics_process(delta) -> void:
