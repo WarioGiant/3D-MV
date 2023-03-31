@@ -32,8 +32,7 @@ uv1_triplanar = true
 albedo_texture = ExtResource("2_0s701")
 uv1_triplanar = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ook42"]
-size = Vector3(120.79, 12.9942, 91.4205)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_tajc2"]
 
 [node name="world" type="Node3D"]
 
@@ -46,7 +45,7 @@ shadow_enabled = true
 shadow_opacity = 0.8
 
 [node name="player" parent="." instance=ExtResource("1_dco8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48769, 32.2264, 0)
 
 [node name="CSGCombiner3D2" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38217, 0)
@@ -136,11 +135,11 @@ transform = Transform3D(-0.0126664, -0.609387, -0.792771, 0.208343, 0.773826, -0
 size = Vector3(5.28627, 0.585753, 17.9887)
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -31.2833, 0)
+collision_layer = 0
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.1692, 0)
-shape = SubResource("BoxShape3D_ook42")
+shape = SubResource("WorldBoundaryShape3D_tajc2")
 
 [node name="hinge" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.96167, 41.6337, 0)

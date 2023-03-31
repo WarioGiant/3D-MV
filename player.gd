@@ -22,7 +22,7 @@ var can_move := true
 @onready var body = get_node("body")
 @onready var camera_yaw = get_node("camera_yaw")
 @onready var camera_pitch = get_node("camera_yaw/camera_pitch")
-@onready var camera = get_node("camera_yaw/camera_pitch/spring/camera")
+@onready var camera = get_node("camera_yaw/camera_pitch/camera_spring/camera")
 
 func handle_camera(delta) -> void:
 #	if Input.is_action_just_pressed("lock_on"):

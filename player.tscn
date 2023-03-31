@@ -1,11 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bs4ox7gbek6qi"]
+[gd_scene load_steps=15 format=3 uid="uid://bs4ox7gbek6qi"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_mmyit"]
 [ext_resource type="Script" path="res://camera_pivot.gd" id="2_cv52i"]
 [ext_resource type="ArrayMesh" uid="uid://dhfdit2btrrc5" path="res://character/sword.obj" id="3_chrry"]
+[ext_resource type="Texture2D" uid="uid://b1hs584rdrvqk" path="res://shadow.png" id="4_atcrk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0iu8o"]
 height = 1.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_74tt8"]
+radius = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ihels"]
 size = Vector3(0.6, 1.5, 0.2)
@@ -17,6 +21,38 @@ emission_energy_multiplier = 0.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_himp0"]
 height = 1.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wex2v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j5dd4"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="Animation" id="Animation_63eq5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.314046, 1.68311, -0.561943)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -2.78099)]
+}
 
 [sub_resource type="Animation" id="Animation_kpr47"]
 resource_name = "attack1"
@@ -47,33 +83,6 @@ tracks/1/keys = {
 "values": [Vector3(-0.325582, 1.191, -2.09941), Vector3(-0.325582, 1.191, -2.09941), Vector3(-0.656602, 1.22519, -0.977399), Vector3(-0.987621, 1.25939, 0.144608), Vector3(-1.36762, 1.00811, 1.93988), Vector3(-1.36762, 1.94553, 1.93988)]
 }
 
-[sub_resource type="Animation" id="Animation_63eq5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("body/sword:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.314046, 1.68311, -0.561943)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("body/sword:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, -2.78099)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rxdxc"]
 _data = {
 "RESET": SubResource("Animation_63eq5"),
@@ -81,6 +90,8 @@ _data = {
 }
 
 [node name="player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_mmyit")
 
 [node name="collision" type="CollisionShape3D" parent="."]
@@ -93,10 +104,11 @@ script = ExtResource("2_cv52i")
 
 [node name="camera_pitch" type="Node3D" parent="camera_yaw"]
 
-[node name="spring" type="SpringArm3D" parent="camera_yaw/camera_pitch"]
-spring_length = 3.0
+[node name="camera_spring" type="SpringArm3D" parent="camera_yaw/camera_pitch"]
+shape = SubResource("SphereShape3D_74tt8")
+spring_length = 2.5
 
-[node name="camera" type="Camera3D" parent="camera_yaw/camera_pitch/spring"]
+[node name="camera" type="Camera3D" parent="camera_yaw/camera_pitch/camera_spring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6175e-07, 0, 2.99407)
 size = 10.0
 
@@ -106,10 +118,11 @@ size = 10.0
 transform = Transform3D(-0.935684, 0.352838, 0, -0.352838, -0.935684, 0, 0, 0, 1, -0.314046, 1.68311, -0.561943)
 
 [node name="mesh" type="MeshInstance3D" parent="body/sword"]
+layers = 2
 mesh = ExtResource("3_chrry")
 
 [node name="collision" type="CollisionShape3D" parent="body/sword"]
-transform = Transform3D(1, 2.98023e-08, 6.70552e-08, -8.9407e-08, 1, 5.96046e-08, 8.19564e-08, -1.19209e-07, 1, 0, 0.853341, -4.47035e-08)
+transform = Transform3D(1, 2.98023e-08, 6.70552e-08, -8.9407e-08, 1, 5.96046e-08, 8.19564e-08, -1.19209e-07, 1, -8.9407e-08, 0.91776, -5.96046e-08)
 shape = SubResource("BoxShape3D_ihels")
 
 [node name="foot" type="Node3D" parent="body"]
@@ -120,6 +133,28 @@ layers = 2
 material_override = SubResource("StandardMaterial3D_b6jql")
 mesh = SubResource("CapsuleMesh_himp0")
 skeleton = NodePath("../../..")
+
+[node name="shadow_spring" type="SpringArm3D" parent="body"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("SphereShape3D_wex2v")
+spring_length = 30.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="body/shadow_spring"]
+transform = Transform3D(1, 0, 0, 0, -0.584505, 0.81139, 0, -0.81139, -0.584505, 0, -0.125451, 1.02847)
+visible = false
+mesh = SubResource("BoxMesh_j5dd4")
+skeleton = NodePath("../shadow")
+
+[node name="shadow" type="Decal" parent="body/shadow_spring"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+size = Vector3(1.2, 2, 1.2)
+texture_albedo = ExtResource("4_atcrk")
+upper_fade = 0.643064
+lower_fade = 0.194841
+distance_fade_enabled = true
+distance_fade_begin = 25.0
+distance_fade_length = 5.0
+cull_mask = 1048573
 
 [node name="label" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26403, 0)
