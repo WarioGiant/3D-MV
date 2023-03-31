@@ -1,15 +1,25 @@
-[gd_scene load_steps=15 format=3 uid="uid://bs4ox7gbek6qi"]
+[gd_scene load_steps=21 format=3 uid="uid://2ckfexr35h1r"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_mmyit"]
 [ext_resource type="Script" path="res://camera_pivot.gd" id="2_cv52i"]
-[ext_resource type="ArrayMesh" uid="uid://dhfdit2btrrc5" path="res://character/sword.obj" id="3_chrry"]
+[ext_resource type="ArrayMesh" uid="uid://dhfdit2btrrc5" path="res://player/sword.obj" id="4_5f7o6"]
 [ext_resource type="Texture2D" uid="uid://b1hs584rdrvqk" path="res://shadow.png" id="4_atcrk"]
+[ext_resource type="Script" path="res://player/state_manager.gd" id="5_esapv"]
+[ext_resource type="Script" path="res://player/states/idle.gd" id="6_v2oki"]
+[ext_resource type="Script" path="res://player/states/move.gd" id="7_wtskf"]
+[ext_resource type="Script" path="res://player/states/fall.gd" id="8_okeh8"]
+[ext_resource type="Script" path="res://player/states/dash.gd" id="9_fa7w0"]
+[ext_resource type="Script" path="res://player/states/grab.gd" id="10_6t13t"]
+[ext_resource type="Script" path="res://player/states/jump.gd" id="11_k2tja"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0iu8o"]
 height = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_74tt8"]
 radius = 0.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yxpm0"]
+height = 0.05
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ihels"]
 size = Vector3(0.6, 1.5, 0.2)
@@ -21,11 +31,6 @@ emission_energy_multiplier = 0.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_himp0"]
 height = 1.5
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_wex2v"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_j5dd4"]
-size = Vector3(5, 1, 5)
 
 [sub_resource type="Animation" id="Animation_63eq5"]
 length = 0.001
@@ -99,18 +104,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_0iu8o")
 
 [node name="camera_yaw" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.70236, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.55551, 0)
 script = ExtResource("2_cv52i")
 
 [node name="camera_pitch" type="Node3D" parent="camera_yaw"]
 
 [node name="camera_spring" type="SpringArm3D" parent="camera_yaw/camera_pitch"]
 shape = SubResource("SphereShape3D_74tt8")
-spring_length = 2.5
+spring_length = 3.0
 
 [node name="camera" type="Camera3D" parent="camera_yaw/camera_pitch/camera_spring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6175e-07, 0, 2.99407)
 size = 10.0
+
+[node name="shadow_spring" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_yxpm0")
+spring_length = 30.0
+
+[node name="shadow" type="Decal" parent="shadow_spring"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.44322e-08, 1.70281)
+size = Vector3(1.2, 2.5, 1.2)
+texture_albedo = ExtResource("4_atcrk")
+upper_fade = 0.643064
+lower_fade = 0.194841
+distance_fade_enabled = true
+distance_fade_begin = 25.0
+distance_fade_length = 5.0
+cull_mask = 1048573
 
 [node name="body" type="Node3D" parent="."]
 
@@ -119,7 +140,7 @@ transform = Transform3D(-0.935684, 0.352838, 0, -0.352838, -0.935684, 0, 0, 0, 1
 
 [node name="mesh" type="MeshInstance3D" parent="body/sword"]
 layers = 2
-mesh = ExtResource("3_chrry")
+mesh = ExtResource("4_5f7o6")
 
 [node name="collision" type="CollisionShape3D" parent="body/sword"]
 transform = Transform3D(1, 2.98023e-08, 6.70552e-08, -8.9407e-08, 1, 5.96046e-08, 8.19564e-08, -1.19209e-07, 1, -8.9407e-08, 0.91776, -5.96046e-08)
@@ -134,28 +155,6 @@ material_override = SubResource("StandardMaterial3D_b6jql")
 mesh = SubResource("CapsuleMesh_himp0")
 skeleton = NodePath("../../..")
 
-[node name="shadow_spring" type="SpringArm3D" parent="body"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-shape = SubResource("SphereShape3D_wex2v")
-spring_length = 30.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="body/shadow_spring"]
-transform = Transform3D(1, 0, 0, 0, -0.584505, 0.81139, 0, -0.81139, -0.584505, 0, -0.125451, 1.02847)
-visible = false
-mesh = SubResource("BoxMesh_j5dd4")
-skeleton = NodePath("../shadow")
-
-[node name="shadow" type="Decal" parent="body/shadow_spring"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-size = Vector3(1.2, 2, 1.2)
-texture_albedo = ExtResource("4_atcrk")
-upper_fade = 0.643064
-lower_fade = 0.194841
-distance_fade_enabled = true
-distance_fade_begin = 25.0
-distance_fade_length = 5.0
-cull_mask = 1048573
-
 [node name="label" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26403, 0)
 billboard = 1
@@ -164,3 +163,24 @@ billboard = 1
 libraries = {
 "": SubResource("AnimationLibrary_rxdxc")
 }
+
+[node name="state_manager" type="Node" parent="."]
+script = ExtResource("5_esapv")
+
+[node name="idle" type="Node" parent="state_manager"]
+script = ExtResource("6_v2oki")
+
+[node name="move" type="Node" parent="state_manager"]
+script = ExtResource("7_wtskf")
+
+[node name="fall" type="Node" parent="state_manager"]
+script = ExtResource("8_okeh8")
+
+[node name="dash" type="Node" parent="state_manager"]
+script = ExtResource("9_fa7w0")
+
+[node name="grab" type="Node" parent="state_manager"]
+script = ExtResource("10_6t13t")
+
+[node name="jump" type="Node" parent="state_manager"]
+script = ExtResource("11_k2tja")

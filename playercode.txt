@@ -1,0 +1,31 @@
+	#Fall
+	if not is_on_floor():
+		if gliding:
+			velocity.y -= 1 * delta
+			velocity.y = max(velocity.y, -5)
+#		else:
+#			velocity.y -= gravity * delta
+#			if velocity.y <= 0:
+#				velocity.y -= gravity * delta * 2
+	
+	#Handle movement input and set direction
+	var input_dir = Input.get_vector("left", "right", "forward", "backward").normalized()
+	local_input_dir = camera_yaw.transform.basis * Vector3(input_dir.x, 0, input_dir.y)
+	if can_move:
+		direction = local_input_dir * speed
+	
+	#Glide
+	if (is_on_floor() or grabbed) or (Input.is_action_just_pressed("glide") and gliding):
+		gliding = false
+	elif Input.is_action_just_pressed("glide"):
+		gliding = true
+	
+	velocity.x = lerp(velocity.x, direction.x, delta * 10)
+	velocity.z = lerp(velocity.z, direction.z, delta * 10)
+		
+	jump(delta)
+	grab(delta)
+	dash(delta)
+	handle_sprinting(delta)
+	
+	

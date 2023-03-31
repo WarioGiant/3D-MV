@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://vtoalko7hkbg"]
+[gd_scene load_steps=14 format=3 uid="uid://vtoalko7hkbg"]
 
-[ext_resource type="PackedScene" uid="uid://bs4ox7gbek6qi" path="res://player.tscn" id="1_dco8q"]
+[ext_resource type="PackedScene" uid="uid://2ckfexr35h1r" path="res://player.tscn" id="1_dco8q"]
 [ext_resource type="Texture2D" uid="uid://c7rgv0pq5l3uh" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0s701"]
 [ext_resource type="Texture2D" uid="uid://barvusapbqvdi" path="res://addons/kenney_prototype_textures/orange/texture_06.png" id="2_a758j"]
 [ext_resource type="Texture2D" uid="uid://bpwjx7hacgj0x" path="res://addons/kenney_prototype_textures/green/texture_01.png" id="3_l4qjv"]
@@ -33,6 +33,13 @@ albedo_texture = ExtResource("2_0s701")
 uv1_triplanar = true
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_tajc2"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ydd4b"]
+radius = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qqauh"]
+top_radius = 0.1
+bottom_radius = 0.05
 
 [node name="world" type="Node3D"]
 
@@ -134,14 +141,24 @@ size = Vector3(5.28627, 0.585753, 21.3411)
 transform = Transform3D(-0.0126664, -0.609387, -0.792771, 0.208343, 0.773826, -0.598153, 0.977974, -0.172744, 0.11716, 20.7939, 24.6178, -14.6331)
 size = Vector3(5.28627, 0.585753, 17.9887)
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="boundary" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="collision" type="CollisionShape3D" parent="boundary"]
 shape = SubResource("WorldBoundaryShape3D_tajc2")
 
-[node name="hinge" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.96167, 41.6337, 0)
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 38.1784, 5.34157)
+collision_layer = 5
+collision_mask = 5
 
-[connection signal="body_entered" from="Area3D" to="player" method="_on_area_3d_body_entered"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_ydd4b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_qqauh")
+
+[connection signal="body_entered" from="boundary" to="player" method="_on_area_3d_body_entered"]
