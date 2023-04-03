@@ -1,16 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://i7nkqi1tgqg7"]
+[gd_scene load_steps=7 format=3 uid="uid://csguhtnqxc5ms"]
 
-[ext_resource type="Shader" uid="uid://dj2kadfn888cu" path="res://foliage.tres" id="1_3vctc"]
 [ext_resource type="ArrayMesh" uid="uid://d3mwsectsv5w8" path="res://tree/leaves.obj" id="1_16w1u"]
+[ext_resource type="Shader" path="res://foliage.gdshader" id="1_klssl"]
 [ext_resource type="ArrayMesh" uid="uid://c218upawo2mjh" path="res://tree/tree.obj" id="1_o433v"]
 [ext_resource type="Texture2D" uid="uid://bwv8wxhsox1di" path="res://tree/leaves.png" id="3_84vga"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1qqs5"]
 render_priority = 0
-shader = ExtResource("1_3vctc")
-shader_parameter/inflate = 1.806
-shader_parameter/ColorParameter = Color(0.780392, 0.156863, 0, 1)
-shader_parameter/Texture2DParameter = ExtResource("3_84vga")
+shader = ExtResource("1_klssl")
+shader_parameter/albedo = Color(0.101961, 0.941176, 0.321569, 1)
+shader_parameter/inflate = 1.0
+shader_parameter/size = 2.0
+shader_parameter/alpha_mask = ExtResource("3_84vga")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yx1ia"]
 albedo_color = Color(0.333333, 0.129412, 0, 1)
@@ -19,6 +20,8 @@ albedo_color = Color(0.333333, 0.129412, 0, 1)
 
 [node name="leaves" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_1qqs5")
+cast_shadow = 2
+extra_cull_margin = 1.0
 mesh = ExtResource("1_16w1u")
 skeleton = NodePath("../tree")
 

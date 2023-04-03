@@ -15,7 +15,7 @@ disable_ambient_light = true
 albedo_color = Color(0, 0, 0, 1)
 metallic = 0.5
 emission_enabled = true
-emission = Color(1, 0.152941, 0.0901961, 1)
+emission = Color(0.941176, 0.537255, 0, 1)
 emission_energy_multiplier = 50.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ly82u"]
@@ -56,9 +56,9 @@ mesh = SubResource("ArrayMesh_ly82u")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64727, 0)
-light_color = Color(1, 0.623529, 0.388235, 1)
-light_energy = 4.254
-light_volumetric_fog_energy = 4.339
+light_color = Color(0.941176, 0.537255, 0, 1)
+light_energy = 2.22
+light_volumetric_fog_energy = 2.577
 light_size = 0.237
 light_bake_mode = 1
 shadow_enabled = true

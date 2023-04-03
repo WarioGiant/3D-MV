@@ -120,7 +120,8 @@ shape = SubResource("SphereShape3D_74tt8")
 spring_length = 3.0
 
 [node name="camera" type="Camera3D" parent="camera_yaw/camera_pitch/camera_spring"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6175e-07, 0, 2.99407)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+fov = 80.0
 size = 10.0
 
 [node name="shadow_spring" type="SpringArm3D" parent="."]
