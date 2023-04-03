@@ -1,9 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://2ckfexr35h1r"]
+[gd_scene load_steps=22 format=3 uid="uid://b3o11fjfe8tax"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_mmyit"]
 [ext_resource type="Script" path="res://camera_pivot.gd" id="2_cv52i"]
+[ext_resource type="Texture2D" uid="uid://b1hs584rdrvqk" path="res://player/shadow.png" id="3_c2bj7"]
 [ext_resource type="ArrayMesh" uid="uid://dhfdit2btrrc5" path="res://player/sword.obj" id="4_5f7o6"]
-[ext_resource type="Texture2D" uid="uid://b1hs584rdrvqk" path="res://shadow.png" id="4_atcrk"]
 [ext_resource type="Script" path="res://player/state_manager.gd" id="5_esapv"]
 [ext_resource type="Script" path="res://player/states/idle.gd" id="6_v2oki"]
 [ext_resource type="Script" path="res://player/states/move.gd" id="7_wtskf"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://player/states/dash.gd" id="9_fa7w0"]
 [ext_resource type="Script" path="res://player/states/grab.gd" id="10_6t13t"]
 [ext_resource type="Script" path="res://player/states/jump.gd" id="11_k2tja"]
+[ext_resource type="Script" path="res://fps.gd" id="13_8jyw0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0iu8o"]
 height = 1.5
@@ -25,9 +26,14 @@ height = 0.05
 size = Vector3(0.6, 1.5, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b6jql"]
-emission_enabled = true
-emission = Color(0.25098, 0.694118, 0.976471, 1)
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
 emission_energy_multiplier = 0.0
+proximity_fade_distance = 0.0
+distance_fade_mode = 1
+distance_fade_min_distance = 0.9
+distance_fade_max_distance = 1.2
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_himp0"]
 height = 1.5
@@ -96,7 +102,7 @@ _data = {
 
 [node name="player" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1_mmyit")
 
 [node name="collision" type="CollisionShape3D" parent="."]
@@ -125,7 +131,7 @@ spring_length = 30.0
 [node name="shadow" type="Decal" parent="shadow_spring"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.44322e-08, 1.70281)
 size = Vector3(1.2, 2.5, 1.2)
-texture_albedo = ExtResource("4_atcrk")
+texture_albedo = ExtResource("3_c2bj7")
 upper_fade = 0.643064
 lower_fade = 0.194841
 distance_fade_enabled = true
@@ -155,8 +161,16 @@ material_override = SubResource("StandardMaterial3D_b6jql")
 mesh = SubResource("CapsuleMesh_himp0")
 skeleton = NodePath("../../..")
 
+[node name="mesh2" type="MeshInstance3D" parent="body/foot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+layers = 2
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_himp0")
+skeleton = NodePath("../../..")
+
 [node name="label" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26403, 0)
+visible = false
 billboard = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -184,3 +198,8 @@ script = ExtResource("10_6t13t")
 
 [node name="jump" type="Node" parent="state_manager"]
 script = ExtResource("11_k2tja")
+
+[node name="fps" type="RichTextLabel" parent="."]
+offset_right = 80.0
+offset_bottom = 40.0
+script = ExtResource("13_8jyw0")

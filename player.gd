@@ -35,5 +35,5 @@ func _process(delta) -> void:
 func _physics_process(delta) -> void:
 	move_and_slide()
 
-func _on_area_3d_body_entered(_body):
-	global_position = Vector3(0, 32, 0)
+func die(_body):
+	global_position = Vector3(-5, 10, 0)

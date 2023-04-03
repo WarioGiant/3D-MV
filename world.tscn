@@ -1,24 +1,37 @@
-[gd_scene load_steps=14 format=3 uid="uid://vtoalko7hkbg"]
+[gd_scene load_steps=15 format=3 uid="uid://vtoalko7hkbg"]
 
-[ext_resource type="PackedScene" uid="uid://2ckfexr35h1r" path="res://player.tscn" id="1_dco8q"]
+[ext_resource type="PackedScene" uid="uid://b3o11fjfe8tax" path="res://player.tscn" id="1_dco8q"]
 [ext_resource type="Texture2D" uid="uid://c7rgv0pq5l3uh" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0s701"]
 [ext_resource type="Texture2D" uid="uid://barvusapbqvdi" path="res://addons/kenney_prototype_textures/orange/texture_06.png" id="2_a758j"]
 [ext_resource type="Texture2D" uid="uid://bpwjx7hacgj0x" path="res://addons/kenney_prototype_textures/green/texture_01.png" id="3_l4qjv"]
+[ext_resource type="PackedScene" uid="uid://i7nkqi1tgqg7" path="res://tree/tree.tscn" id="5_6tfpp"]
+[ext_resource type="PackedScene" uid="uid://doepihk6f3iru" path="res://bush.tscn" id="6_srb42"]
+[ext_resource type="PackedScene" uid="uid://b70svo86kwkx0" path="res://lantern/lantern.tscn" id="7_s1xot"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ysjaw"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Sky" id="Sky_w2yhn"]
+[sub_resource type="Sky" id="Sky_xevg7"]
 sky_material = SubResource("ProceduralSkyMaterial_ysjaw")
 
 [sub_resource type="Environment" id="Environment_4t3al"]
 background_mode = 2
-sky = SubResource("Sky_w2yhn")
+sky = SubResource("Sky_xevg7")
 ambient_light_source = 3
 tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
 sdfgi_y_scale = 0
+sdfgi_energy = 0.5
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.128
+volumetric_fog_albedo = Color(0.329412, 0.67451, 1, 1)
+adjustment_enabled = true
+adjustment_brightness = 1.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdhay"]
 albedo_texture = ExtResource("2_a758j")
@@ -34,20 +47,17 @@ uv1_triplanar = true
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_tajc2"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ydd4b"]
-radius = 0.1
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_qqauh"]
-top_radius = 0.1
-bottom_radius = 0.05
-
 [node name="world" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4t3al")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.0680675, 0.538914, -0.839606, 0, 0.841558, 0.540167, 0.997681, -0.0367678, 0.0572827, -4.21902, 38.0925, 9.00787)
+transform = Transform3D(0.0476871, 0.978065, -0.20277, -0.0485708, 0.205031, 0.97755, 0.997681, -0.0367678, 0.0572828, -4.21902, 38.0925, 9.00787)
+light_color = Color(0.701961, 0.564706, 0.878431, 1)
+light_energy = 0.132
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 4.961
 shadow_enabled = true
 shadow_opacity = 0.8
 
@@ -57,6 +67,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.48769, 32.2264, 0)
 [node name="CSGCombiner3D2" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38217, 0)
 use_collision = true
+collision_layer = 3
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.1246, -24.3535)
@@ -86,10 +97,11 @@ material = SubResource("StandardMaterial3D_mee0e")
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38217, 0)
 use_collision = true
+collision_layer = 3
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.8167, 32.4349, 4.43078)
-size = Vector3(25.5498, 1.3459, 22.9482)
+size = Vector3(68.5035, 1.3459, 22.9482)
 material = SubResource("StandardMaterial3D_d5v1a")
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="CSGCombiner3D"]
@@ -136,6 +148,7 @@ material = SubResource("StandardMaterial3D_vdhay")
 [node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(0.811523, 0.178789, 0.556296, 0, 0.952039, -0.305978, -0.584321, 0.248308, 0.772601, -13.6518, 34.9332, -11.3032)
 size = Vector3(5.28627, 0.585753, 21.3411)
+material = SubResource("StandardMaterial3D_d5v1a")
 
 [node name="CSGBox3D12" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(-0.0126664, -0.609387, -0.792771, 0.208343, 0.773826, -0.598153, 0.977974, -0.172744, 0.11716, 20.7939, 24.6178, -14.6331)
@@ -148,17 +161,66 @@ collision_mask = 3
 [node name="collision" type="CollisionShape3D" parent="boundary"]
 shape = SubResource("WorldBoundaryShape3D_tajc2")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 38.1784, 5.34157)
-collision_layer = 5
-collision_mask = 5
+[node name="foliage" type="Node" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-shape = SubResource("CylinderShape3D_ydd4b")
+[node name="tree" parent="foliage" instance=ExtResource("5_6tfpp")]
+transform = Transform3D(-0.169779, 0, 0.985482, 0, 1, 0, -0.985482, 0, -0.169779, -21.774, 30.7257, -1.38435)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_qqauh")
+[node name="tree2" parent="foliage" instance=ExtResource("5_6tfpp")]
+transform = Transform3D(-0.946517, 0, -0.228812, 0, 0.973781, 0, 0.228812, 0, -0.946517, -14.7389, 30.7257, -4.28067)
+
+[node name="tree3" parent="foliage" instance=ExtResource("5_6tfpp")]
+transform = Transform3D(0.120006, 0, 0.966357, 0, 0.973781, 0, -0.966357, 0, 0.120006, -2.48641, 30.7257, 10.0236)
+
+[node name="tree4" parent="foliage" instance=ExtResource("5_6tfpp")]
+transform = Transform3D(-0.857061, 0, 0.462271, 0, 0.973781, 0, -0.462271, 0, -0.857061, -18.655, 30.323, 5.20983)
+
+[node name="tree5" parent="foliage" instance=ExtResource("5_6tfpp")]
+transform = Transform3D(-0.651321, 0, 0.723899, 0, 0.973781, 0, -0.723899, 0, -0.651321, -1.58765, 30.6444, 0.764618)
+
+[node name="tree7" parent="foliage" instance=ExtResource("5_6tfpp")]
+transform = Transform3D(0.132696, 0, 0.964697, 0, 0.973781, 0, -0.964697, 0, 0.132696, -6.19025, 30.7257, -1.14184)
+
+[node name="tree8" parent="foliage" instance=ExtResource("5_6tfpp")]
+transform = Transform3D(-0.884033, 0, -0.408331, 0, 0.973781, 0, 0.408331, 0, -0.884033, -8.38204, 30.7257, 6.83683)
+
+[node name="tree9" parent="foliage" instance=ExtResource("5_6tfpp")]
+transform = Transform3D(-0.586782, 0, -0.777133, 0, 0.973781, 0, 0.777133, 0, -0.586782, -12.4074, 30.7257, -0.67604)
+
+[node name="tree10" parent="foliage" instance=ExtResource("5_6tfpp")]
+transform = Transform3D(-0.918367, 0, -0.323805, 0, 0.973781, 0, 0.323805, 0, -0.918367, -11.8783, 30.7257, 10.2711)
+
+[node name="bush2" parent="foliage" instance=ExtResource("6_srb42")]
+transform = Transform3D(-0.159916, 0, 0.987131, 0, 1, 0, -0.987131, 0, -0.159916, -6.04166, 30.7257, 12.4058)
+
+[node name="bush3" parent="foliage" instance=ExtResource("6_srb42")]
+transform = Transform3D(-0.159916, 0, 0.987131, 0, 1, 0, -0.987131, 0, -0.159916, -11.7374, 30.7257, 13.3211)
+
+[node name="bush4" parent="foliage" instance=ExtResource("6_srb42")]
+transform = Transform3D(-0.159916, 0, 0.987131, 0, 1, 0, -0.987131, 0, -0.159916, -16.9465, 30.7257, 14.1649)
+
+[node name="bush5" parent="foliage" instance=ExtResource("6_srb42")]
+transform = Transform3D(-0.159916, 0, 0.987131, 0, 1, 0, -0.987131, 0, -0.159916, -0.284728, 30.7257, 11.4657)
+
+[node name="bush6" parent="foliage" instance=ExtResource("6_srb42")]
+transform = Transform3D(-0.159916, 0, 0.987131, 0, 1, 0, -0.987131, 0, -0.159916, -6.04166, 34.4733, 12.4058)
+
+[node name="bush7" parent="foliage" instance=ExtResource("6_srb42")]
+transform = Transform3D(-0.159916, 0, 0.987131, 0, 1, 0, -0.987131, 0, -0.159916, -11.7374, 34.4733, 13.3211)
+
+[node name="bush8" parent="foliage" instance=ExtResource("6_srb42")]
+transform = Transform3D(-0.159916, 0, 0.987131, 0, 1, 0, -0.987131, 0, -0.159916, -16.9465, 34.4733, 14.1649)
+
+[node name="bush9" parent="foliage" instance=ExtResource("6_srb42")]
+transform = Transform3D(-0.159916, 0, 0.987131, 0, 1, 0, -0.987131, 0, -0.159916, -0.284728, 34.4733, 11.4657)
+
+[node name="lantern" parent="." instance=ExtResource("7_s1xot")]
+transform = Transform3D(-0.169779, 0, 0.985482, 0, 1, 0, -0.985482, 0, -0.169779, -18.4135, 30.0396, -2.44765)
+
+[node name="lantern2" parent="." instance=ExtResource("7_s1xot")]
+transform = Transform3D(-0.169779, 0, 0.985482, 0, 1, 0, -0.985482, 0, -0.169779, -10.7929, 30.1664, 8.30302)
+
+[node name="lantern3" parent="." instance=ExtResource("7_s1xot")]
+transform = Transform3D(-0.169779, 0, 0.985482, 0, 1, 0, -0.985482, 0, -0.169779, -10.3788, 29.2056, -2.61061)
 
 [connection signal="body_entered" from="boundary" to="player" method="_on_area_3d_body_entered"]

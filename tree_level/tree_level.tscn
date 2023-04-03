@@ -1,0 +1,124 @@
+[gd_scene load_steps=10 format=3 uid="uid://p378l1y6enei"]
+
+[ext_resource type="PackedScene" uid="uid://i7nkqi1tgqg7" path="res://tree/tree.tscn" id="1_gy5tb"]
+[ext_resource type="PackedScene" uid="uid://csuh5wwoe47gl" path="res://tree_level/trees/giant_tree_1.tscn" id="3_avqcg"]
+[ext_resource type="PackedScene" uid="uid://ubjwagnimheh" path="res://tree_level/platforms/plat_hole_1.tscn" id="4_x4oha"]
+[ext_resource type="PackedScene" uid="uid://b3o11fjfe8tax" path="res://player.tscn" id="5_7fb6t"]
+[ext_resource type="PackedScene" uid="uid://b70svo86kwkx0" path="res://lantern/lantern.tscn" id="5_k8bks"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dujp6"]
+sky_top_color = Color(0, 0.627451, 0.894118, 1)
+sky_horizon_color = Color(0.0431373, 0.0431373, 0.0431373, 1)
+sky_energy_multiplier = 0.0
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_84tnk"]
+sky_material = SubResource("ProceduralSkyMaterial_dujp6")
+
+[sub_resource type="Environment" id="Environment_3sk3o"]
+background_mode = 2
+sky = SubResource("Sky_84tnk")
+tonemap_mode = 2
+tonemap_exposure = 1.7
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 0.45
+sdfgi_cascades = 6
+sdfgi_y_scale = 0
+sdfgi_energy = 0.5
+glow_enabled = true
+glow_intensity = 1.23
+glow_strength = 0.26
+glow_blend_mode = 0
+fog_light_color = Color(0.145098, 0.145098, 0.145098, 1)
+fog_density = 0.1854
+fog_aerial_perspective = 0.035
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.133333, 0.223529, 0.235294, 1)
+volumetric_fog_gi_inject = 0.0
+volumetric_fog_temporal_reprojection_amount = 0.767
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_tygww"]
+
+[node name="tree_level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3sk3o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.787699, 0.61606, 0, -0.61606, -0.787699, -1.63163, 19.1914, 31.4891)
+light_color = Color(0.65098, 0.960784, 1, 1)
+light_energy = 0.458
+light_volumetric_fog_energy = 9.085
+light_angular_distance = 0.4
+light_bake_mode = 1
+shadow_enabled = true
+shadow_opacity = 0.95
+
+[node name="foliage" type="Node" parent="."]
+
+[node name="tree1" parent="foliage" instance=ExtResource("1_gy5tb")]
+transform = Transform3D(-0.271591, 0, 1.57644, 0, 1.59967, 0, -1.57644, 0, -0.271591, 5.41975, 9.5011, -16.3796)
+
+[node name="tree2" parent="foliage" instance=ExtResource("1_gy5tb")]
+transform = Transform3D(-1.43567, 0.160664, 0.582702, 0.148869, 1.54942, -0.060422, -0.585827, 2.89316e-09, -1.44337, 1.27796, 14.3653, 2.72309)
+
+[node name="tree3" parent="foliage" instance=ExtResource("1_gy5tb")]
+transform = Transform3D(-1.3505, 0.268462, 0.728415, 0.236282, 1.53442, -0.127443, -0.73948, -1.43096e-08, -1.37101, -12.7569, 13.5441, 6.45192)
+
+[node name="tree4" parent="foliage" instance=ExtResource("1_gy5tb")]
+transform = Transform3D(0.0241667, -0.340842, -1.51979, 0.00541916, 1.51998, -0.340799, 1.55753, 0, 0.0247668, 13.674, 13.073, 0.310365)
+
+[node name="tree5" parent="foliage" instance=ExtResource("1_gy5tb")]
+transform = Transform3D(1.56663, 0, -0.323408, 0, 1.59967, 0, 0.323408, 0, 1.56663, -0.992508, 6.51533, -19.2848)
+
+[node name="tree6" parent="foliage" instance=ExtResource("1_gy5tb")]
+transform = Transform3D(-0.140775, 0, 1.55135, 0, 1.55773, 0, -1.55135, 0, -0.140775, -12.4989, 10.4792, -9.67086)
+
+[node name="giant_tree1" parent="." instance=ExtResource("3_avqcg")]
+transform = Transform3D(0.55907, 0, 0, 0, 0.55907, 0, 0, 0, 0.55907, -0.64743, -16.6204, 0.461233)
+
+[node name="plat_hole1" parent="." instance=ExtResource("4_x4oha")]
+transform = Transform3D(0.55907, 0, 0, 0, 0.55907, 0, 0, 0, 0.55907, 0, 7.992, 0)
+
+[node name="plat_hole2" parent="." instance=ExtResource("4_x4oha")]
+transform = Transform3D(0.55907, 0, 0, 0, 0.55907, 0, 0, 0, 0.55907, 0, 4.36523, 29.4508)
+
+[node name="plat_hole3" parent="." instance=ExtResource("4_x4oha")]
+transform = Transform3D(0.55907, 0, 0, 0, 0.55907, 0, 0, 0, 0.55907, 30.8017, 0.94573, 17.9804)
+
+[node name="player" parent="." instance=ExtResource("5_7fb6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31003, 10, 0)
+
+[node name="fall_boundary" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.04404, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fall_boundary"]
+shape = SubResource("WorldBoundaryShape3D_tygww")
+
+[node name="lantern" parent="." instance=ExtResource("5_k8bks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 8, 7)
+
+[node name="lantern2" parent="." instance=ExtResource("5_k8bks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 8, 7)
+
+[node name="lantern3" parent="." instance=ExtResource("5_k8bks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 8, -7)
+
+[node name="lantern4" parent="." instance=ExtResource("5_k8bks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 8, -7)
+
+[node name="lantern5" parent="." instance=ExtResource("5_k8bks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.39656, 4.1402, 37.4719)
+
+[node name="lantern6" parent="." instance=ExtResource("5_k8bks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60344, 4.1402, 37.4719)
+
+[node name="lantern7" parent="." instance=ExtResource("5_k8bks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.39656, 4.1402, 23.4719)
+
+[node name="lantern8" parent="." instance=ExtResource("5_k8bks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60344, 4.1402, 23.4719)
+
+[connection signal="area_entered" from="fall_boundary" to="player" method="die"]

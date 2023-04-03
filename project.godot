@@ -11,9 +11,17 @@ config_version=5
 [application]
 
 config/name="char"
-run/main_scene="res://world.tscn"
+run/main_scene="res://tree_level/tree_level.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 boot_splash/show_image=false
+
+[autoload]
+
+Mouse="*res://mouse.gd"
+
+[display]
+
+window/vsync/vsync_mode=0
 
 [input]
 
@@ -101,6 +109,11 @@ ground_pound={
 "events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":10,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_1="camera"
+3d_physics/layer_2="player"
 
 [rendering]
 
