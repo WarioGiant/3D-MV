@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="ArrayMesh" uid="uid://y028ab3vathj" path="res://components/geyser/geyser_base.obj" id="1_75tht"]
+[ext_resource type="Script" path="res://components/geyser/geyser.gd" id="1_jr5fs"]
+[ext_resource type="Shader" path="res://components/geyser/geyser.gdshader" id="2_bb66v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iatre"]
+albedo_color = Color(0.541176, 0.462745, 0.372549, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wjoy0"]
+points = PackedVector3Array(-0.6565, -0.0622484, -2.02038, -6.12736e-05, 0.336288, -1.36538, 0.624326, -0.0622484, -1.9215, 0.241742, -0.097128, -0.744788, -0.230099, -0.097128, -0.708399, -0.633375, -0.097128, -0.4604, -1.63467, -0.0622484, -1.18778, -0.802556, 0.336288, -1.10472, -0.230099, 0.469319, -0.708399, 0.802433, 0.336288, -1.10472, 1.71853, -0.0622484, -1.2487, 0.602012, -0.097128, -0.437855, -0.744539, -0.097128, 0, -2.12436, -0.0622484, 0, -1.29874, 0.336288, -0.422033, -0.744539, 0.469374, 0, 0.602012, 0.469319, -0.437855, 1.29821, 0.336288, -0.422033, 2.01997, -0.0622484, 0, 0.782553, -0.097128, 0, -0.633375, -0.097128, 0.460004, -1.63467, -0.0622484, 1.18739, -1.29874, 0.336288, 0.421638, -0.802556, 0.336288, 1.10433, -0.230099, 0.469319, 0.708003, 0.602012, 0.469319, 0.437459, 1.29821, 0.336288, 0.421638, 1.71853, -0.0622484, 1.2483, 0.602012, -0.097128, 0.437459, -0.230099, -0.097128, 0.708003, -0.6565, -0.0622484, 2.02038, -6.12736e-05, 0.336288, 1.36498, 0.802433, 0.336288, 1.10433, 0.624326, -0.0622484, 1.9211, 0.241742, -0.097128, 0.744392)
+
+[sub_resource type="Gradient" id="Gradient_m2abw"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i8045"]
+gradient = SubResource("Gradient_m2abw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j7hul"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+spread = 10.0
+gravity = Vector3(0, 5, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+linear_accel_max = 10.0
+color_ramp = SubResource("GradientTexture1D_i8045")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4n4o"]
+render_priority = 0
+shader = ExtResource("2_bb66v")
+shader_parameter/color = Color(0.65098, 1, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hd6wn"]
+material = SubResource("ShaderMaterial_k4n4o")
+height = 1.2
+radial_segments = 16
+rings = 4
+
+[node name="geyser" type="StaticBody3D"]
+collision_layer = 3
+script = ExtResource("1_jr5fs")
+
+[node name="geyser_base_mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_75tht")
+surface_material_override/0 = SubResource("StandardMaterial3D_iatre")
+
+[node name="geyser_base_collision" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_wjoy0")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.127256, 0)
+amount = 200
+visibility_aabb = AABB(-3.28098, -1.44705, -2.75489, 6.50778, 18.9215, 6.37109)
+process_material = SubResource("ParticleProcessMaterial_j7hul")
+draw_pass_1 = SubResource("CapsuleMesh_hd6wn")

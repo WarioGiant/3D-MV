@@ -1,16 +1,25 @@
 #Dash
 extends BaseState
 
+var dashing : bool
+
 func enter() -> void:
+	super()
+	dashing = false
+	player.dashes -= 1
+	player.dashes = max(player.dashes, 0)
 	player.velocity.y = 0
 
 func loop(delta: float) -> int:
+	update_body_angle(delta)
 	player.velocity = lerp(player.velocity, Vector3.ZERO, delta * 10)
-	var input_angle := Vector2(player.get_local_input_dir().z, player.get_local_input_dir().x).angle()
-	player.body.rotation.y = lerp_angle(player.body.rotation.y, input_angle, delta * 10)
-	
-	#State Logic
-	if Input.is_action_just_released("dash"):
-		player.velocity = player.get_local_input_dir() * 135
-		return State.Move
+	#Dash
+	if Input.is_action_just_released("dash") and not dashing:
+		dashing = true
+		player.velocity = get_local_input_dir() * 135
+	if player.velocity.length() < player.speed and dashing:
+		if player.is_on_floor():
+			return State.Move
+		else:
+			return State.Fall
 	return State.Null

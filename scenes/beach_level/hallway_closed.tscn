@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bi3y1a427qvu6"]
+
+[node name="hallway_closed" type="CSGCombiner3D"]
+use_collision = true
+collision_layer = 3
+
+[node name="floor" type="CSGBox3D" parent="."]
+size = Vector3(10, 1, 25)
+
+[node name="ceiling" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+size = Vector3(10, 2, 25)
+
+[node name="wall" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 7, 0)
+size = Vector3(2, 14, 25)
+
+[node name="wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, 0)
+size = Vector3(2, 14, 25)

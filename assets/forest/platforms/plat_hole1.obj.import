@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dnip4t62svkiq"
+path="res://.godot/imported/plat_hole1.obj-6c1f89fef8532674f0b3c36560d34845.mesh"
+
+[deps]
+
+files=["res://.godot/imported/plat_hole1.obj-6c1f89fef8532674f0b3c36560d34845.mesh"]
+
+source_file="res://assets/forest/platforms/plat_hole1.obj"
+dest_files=["res://.godot/imported/plat_hole1.obj-6c1f89fef8532674f0b3c36560d34845.mesh", "res://.godot/imported/plat_hole1.obj-6c1f89fef8532674f0b3c36560d34845.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

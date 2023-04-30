@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" uid="uid://bi3y1a427qvu6" path="res://scenes/beach_level/hallway_closed.tscn" id="1_e86rp"]
+
+[node name="l_shape_closed" type="CSGCombiner3D"]
+use_collision = true
+collision_layer = 3
+
+[node name="hallway_closed" parent="." instance=ExtResource("1_e86rp")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="hallway_closed"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 7, -16.5)
+size = Vector3(10, 14, 2)
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -17.5, 0, -17.5)
+
+[node name="floor" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.00002)
+size = Vector3(10, 1, 35)
+
+[node name="ceiling" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 5)
+size = Vector3(10, 2, 35)
+
+[node name="wall" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 7, 0)
+size = Vector3(2, 14, 25)
+
+[node name="wall2" type="CSGBox3D" parent="CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, 5)
+size = Vector3(2, 14, 35)

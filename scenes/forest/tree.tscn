@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="ArrayMesh" uid="uid://d3mwsectsv5w8" path="res://assets/forest/tree/leaves.obj" id="1_16w1u"]
+[ext_resource type="Shader" path="res://assets/foliage.gdshader" id="1_klssl"]
+[ext_resource type="ArrayMesh" uid="uid://c218upawo2mjh" path="res://assets/forest/tree/tree.obj" id="1_o433v"]
+[ext_resource type="Texture2D" uid="uid://bwv8wxhsox1di" path="res://assets/forest/tree/leaves.png" id="3_84vga"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qqs5"]
+render_priority = 0
+shader = ExtResource("1_klssl")
+shader_parameter/albedo = Color(0.94902, 0.105882, 0.0470588, 1)
+shader_parameter/inflate = 1.0
+shader_parameter/size = 2.1
+shader_parameter/alpha_mask = ExtResource("3_84vga")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yx1ia"]
+albedo_color = Color(0.333333, 0.129412, 0, 1)
+
+[node name="tree" type="Node3D"]
+
+[node name="leaves" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_1qqs5")
+extra_cull_margin = 3.0
+mesh = ExtResource("1_16w1u")
+skeleton = NodePath("../tree")
+
+[node name="tree" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_yx1ia")
+mesh = ExtResource("1_o433v")

@@ -2,25 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7t6kcvpj4tyu"
-path.s3tc="res://.godot/imported/texture_02.png-814d4f515892bb8274d285748f4a73a0.s3tc.ctex"
+uid="uid://bdowoh51r1xbv"
+path="res://.godot/imported/wood_n.png-eeefa95964ac44eb03bc78df5b2c39a0.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/kenney_prototype_textures/dark/texture_02.png"
-dest_files=["res://.godot/imported/texture_02.png-814d4f515892bb8274d285748f4a73a0.s3tc.ctex"]
+source_file="res://assets/forest/platforms/wood_n.png"
+dest_files=["res://.godot/imported/wood_n.png-eeefa95964ac44eb03bc78df5b2c39a0.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

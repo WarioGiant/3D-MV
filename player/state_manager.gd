@@ -8,16 +8,21 @@ extends Node
 	BaseState.State.Dash: $dash,
 	BaseState.State.Grab: $grab,
 	BaseState.State.Jump: $jump,
+	BaseState.State.Swing: $swing,
+	BaseState.State.Dead: $dead,
+	BaseState.State.Attack: $attack,
 }
 
 var current_state_node : BaseState
 
-func change_state(state: int):
+func change_state(new_state: int) -> void:
 	if current_state_node:
 		current_state_node.exit()
-	current_state_node = states[state]
+	states[new_state].enter()
+	current_state_node = states[new_state]
 	player.get_node("label").text = current_state_node.name
-	current_state_node.enter()
+	if player.is_on_floor():
+		player.reset_jumps_and_dashes()
 
 func _ready() -> void:
 	for child in get_children():
@@ -25,6 +30,8 @@ func _ready() -> void:
 	change_state(BaseState.State.Idle)
 
 func _physics_process(delta: float) -> void:
+	if player.health <= 0 and current_state_node != states[BaseState.State.Dead]:
+		change_state(BaseState.State.Dead)
 	var new_state : int = current_state_node.loop(delta)
 	if new_state:
 		change_state(new_state)

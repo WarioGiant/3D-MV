@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://y028ab3vathj"
+path="res://.godot/imported/geyser_base.obj-8278f21a6d4bdca3e534b6da954387d2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/geyser_base.obj-8278f21a6d4bdca3e534b6da954387d2.mesh"]
+
+source_file="res://components/geyser/geyser_base.obj"
+dest_files=["res://.godot/imported/geyser_base.obj-8278f21a6d4bdca3e534b6da954387d2.mesh", "res://.godot/imported/geyser_base.obj-8278f21a6d4bdca3e534b6da954387d2.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

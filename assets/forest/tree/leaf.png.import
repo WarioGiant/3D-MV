@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7t6kcvpj4tyu"
-path.s3tc="res://.godot/imported/texture_02.png-814d4f515892bb8274d285748f4a73a0.s3tc.ctex"
+uid="uid://merxmideo6ka"
+path.s3tc="res://.godot/imported/leaf.png-a1c10d39dda88ac441d570b26a436496.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/kenney_prototype_textures/dark/texture_02.png"
-dest_files=["res://.godot/imported/texture_02.png-814d4f515892bb8274d285748f4a73a0.s3tc.ctex"]
+source_file="res://assets/forest/tree/leaf.png"
+dest_files=["res://.godot/imported/leaf.png-a1c10d39dda88ac441d570b26a436496.s3tc.ctex"]
 
 [params]
 

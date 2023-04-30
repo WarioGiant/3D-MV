@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7t6kcvpj4tyu"
-path.s3tc="res://.godot/imported/texture_02.png-814d4f515892bb8274d285748f4a73a0.s3tc.ctex"
+uid="uid://bwv8wxhsox1di"
+path.s3tc="res://.godot/imported/leaves.png-37a68aefb5a843bdc583760fb0f2a4ae.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/kenney_prototype_textures/dark/texture_02.png"
-dest_files=["res://.godot/imported/texture_02.png-814d4f515892bb8274d285748f4a73a0.s3tc.ctex"]
+source_file="res://assets/forest/tree/leaves.png"
+dest_files=["res://.godot/imported/leaves.png-37a68aefb5a843bdc583760fb0f2a4ae.s3tc.ctex"]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
