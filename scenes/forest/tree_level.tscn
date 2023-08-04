@@ -1,10 +1,10 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=15 format=3 uid="uid://dvte3lajvp8jf"]
 
 [ext_resource type="PackedScene" path="res://scenes/forest/tree.tscn" id="1_gy5tb"]
-[ext_resource type="PackedScene" uid="uid://csuh5wwoe47gl" path="res://scenes/forest/giant_tree_1.tscn" id="3_avqcg"]
-[ext_resource type="PackedScene" uid="uid://ubjwagnimheh" path="res://scenes/forest/plat_hole_1.tscn" id="4_x4oha"]
-[ext_resource type="PackedScene" uid="uid://datojmtyg1t1c" path="res://player/player.tscn" id="5_7fb6t"]
-[ext_resource type="Script" path="res://components/hurtbox.gd" id="5_bgaux"]
+[ext_resource type="PackedScene" path="res://scenes/forest/giant_tree_1.tscn" id="3_avqcg"]
+[ext_resource type="PackedScene" path="res://scenes/forest/plat_hole_1.tscn" id="4_x4oha"]
+[ext_resource type="PackedScene" uid="uid://bbb1botr0fjcs" path="res://player/player.tscn" id="5_7fb6t"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="5_bgaux"]
 
 [sub_resource type="Sky" id="Sky_fbisa"]
 
@@ -201,7 +201,6 @@ mesh = SubResource("SphereMesh_chbte")
 [node name="Hurtbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.9978, 0)
 script = ExtResource("5_bgaux")
-damage = 1
 reset_to_checkpoint = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]

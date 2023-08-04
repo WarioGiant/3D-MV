@@ -1,0 +1,248 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3r5pevl7m41n"]
+
+[ext_resource type="PackedScene" uid="uid://dbw8a2t8j1ee7" path="res://scenes/temple_level/hall_open.tscn" id="1_v3n3p"]
+[ext_resource type="Material" uid="uid://ymfbbd5p2lo7" path="res://scenes/temple_level/blue.tres" id="2_3wban"]
+[ext_resource type="PackedScene" uid="uid://b7ls673onqk0m" path="res://scenes/temple_level/hall_closed.tscn" id="2_ff3ti"]
+[ext_resource type="PackedScene" uid="uid://6fvjy0a830r2" path="res://scenes/temple_level/L_open.tscn" id="3_pbr34"]
+[ext_resource type="PackedScene" uid="uid://bi82c8unsdgt6" path="res://scenes/temple_level/L_closed.tscn" id="4_qui12"]
+[ext_resource type="PackedScene" uid="uid://c0lkno33p6nsj" path="res://scenes/temple_level/T_closed.tscn" id="5_tgrr6"]
+[ext_resource type="PackedScene" uid="uid://rukyg4sojb6" path="res://scenes/temple_level/u_closed.tscn" id="7_nhgfl"]
+
+[node name="level" type="Node3D"]
+
+[node name="hall_open" parent="." instance=ExtResource("1_v3n3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 75, 0)
+material_override = ExtResource("2_3wban")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="hall_open"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 4.5, 12)
+size = Vector3(7, 7, 17)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="hall_open"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 4, 11)
+operation = 2
+size = Vector3(6, 5, 16)
+
+[node name="hall_closed" parent="." instance=ExtResource("2_ff3ti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 75, 0)
+material_override = ExtResource("2_3wban")
+
+[node name="hall_open2" parent="." instance=ExtResource("1_v3n3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 75, 0)
+material_override = ExtResource("2_3wban")
+
+[node name="L_open" parent="." instance=ExtResource("3_pbr34")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -57.5, 75, 0)
+material_override = ExtResource("2_3wban")
+
+[node name="hall_open3" parent="." instance=ExtResource("1_v3n3p")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -57.5, 75, -32.5)
+material_override = ExtResource("2_3wban")
+
+[node name="hall_open6" parent="hall_open3" instance=ExtResource("1_v3n3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15, 0)
+material_override = ExtResource("2_3wban")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="hall_open3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1.52588e-05)
+use_collision = true
+collision_layer = 3
+size = Vector3(1, 27, 10)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="hall_open3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, 0)
+operation = 2
+size = Vector3(4.5, 4, 4.5)
+
+[node name="L_closed" parent="." instance=ExtResource("4_qui12")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -57.5, 60, 0)
+material_override = ExtResource("2_3wban")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="L_closed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.5, -2)
+size = Vector3(4, 2, 3)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="L_closed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 4.5, -2.5)
+size = Vector3(4, 2, 2)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="L_closed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 4.5, -2.5)
+size = Vector3(2, 2, 2)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="L_closed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.75, 4.5, -2.5)
+size = Vector3(8.5, 2, 2)
+
+[node name="hall_closed2" parent="." instance=ExtResource("2_ff3ti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 60, 0)
+material_override = ExtResource("2_3wban")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="hall_closed2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.5, 8, 23)
+size = Vector3(6, 6, 39)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="hall_closed2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.5, 4, 40)
+size = Vector3(5, 11, 5)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="hall_closed2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.5, 7.5, 21)
+operation = 2
+size = Vector3(4, 4, 42)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="hall_closed2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.5, 2.5, 40)
+operation = 2
+size = Vector3(4, 11, 4)
+
+[node name="L_closed2" parent="." instance=ExtResource("4_qui12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 60, 0)
+material_override = ExtResource("2_3wban")
+
+[node name="T_closed" parent="." instance=ExtResource("5_tgrr6")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.5, 60, 40)
+material_override = ExtResource("2_3wban")
+metadata/_edit_group_ = true
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="T_closed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 11, 11.5)
+size = Vector3(21, 8, 7)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="T_closed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 10.5, 11.5)
+operation = 2
+size = Vector3(24, 5, 5)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="T_closed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 7.5, 0)
+size = Vector3(1, 13, 9)
+
+[node name="hall_closed4" parent="." instance=ExtResource("2_ff3ti")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 40, 60, 40)
+material_override = ExtResource("2_3wban")
+
+[node name="hall_open4" parent="." instance=ExtResource("1_v3n3p")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 65, 60, 40)
+material_override = ExtResource("2_3wban")
+
+[node name="layer2" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 90, 75, 40)
+
+[node name="hall_closed2" parent="layer2" instance=ExtResource("2_ff3ti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 3.8147e-06)
+material_override = ExtResource("2_3wban")
+
+[node name="L_closed3" parent="layer2/hall_closed2" instance=ExtResource("4_qui12")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 7.50001, 0, 40)
+material_override = ExtResource("2_3wban")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="layer2/hall_closed2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.50004, 7.5, 16.5)
+size = Vector3(25, 15, 10)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="layer2/hall_closed2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.50003, 7.5, 16.5)
+operation = 2
+size = Vector3(32, 12, 7)
+
+[node name="L_closed" parent="layer2" instance=ExtResource("4_qui12")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.5, 0, 0)
+material_override = ExtResource("2_3wban")
+
+[node name="L_closed2" parent="layer2" instance=ExtResource("4_qui12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.5, 0, 3.8147e-06)
+material_override = ExtResource("2_3wban")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="layer2/L_closed2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.28882e-05, 7.5, 19.5)
+size = Vector3(8, 13, 1)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="layer2/L_closed2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.28882e-05, -6.5, 12.5)
+size = Vector3(10, 13, 15)
+
+[node name="hall_closed" parent="layer2/L_closed2" instance=ExtResource("2_ff3ti")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.72205e-05, -28, 17.5)
+material_override = ExtResource("2_3wban")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="layer2/L_closed2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.28882e-05, -7, 15.5)
+operation = 2
+size = Vector3(5, 19, 5)
+
+[node name="hall_closed" parent="layer2" instance=ExtResource("2_ff3ti")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 57.5001, -28, 42.5)
+material_override = ExtResource("2_3wban")
+
+[node name="L_open2" parent="." instance=ExtResource("3_pbr34")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 97.5, 60, 40)
+material_override = ExtResource("2_3wban")
+
+[node name="L_closed" parent="L_open2" instance=ExtResource("4_qui12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15, 0)
+material_override = ExtResource("2_3wban")
+
+[node name="hall_closed" parent="L_open2" instance=ExtResource("2_ff3ti")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -30, 7.5)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="L_open2/hall_closed"]
+transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, 12, 7.5, 0)
+size = Vector3(1, 13, 10)
+
+[node name="hall_open2" parent="L_open2" instance=ExtResource("1_v3n3p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.62939e-06, -30, 32.5)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="L_open2/hall_open2"]
+transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, -13, 0, 0)
+size = Vector3(1, 30, 10)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="L_open2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.5)
+size = Vector3(10, 28, 1)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="L_open2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -21, 15.5)
+operation = 2
+size = Vector3(4.5, 61, 4.5)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="L_open2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.5, -22.5, 3.43323e-05)
+size = Vector3(71, 15, 10)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="L_open2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5, -37.5, 7.24792e-05)
+size = Vector3(81, 15, 10)
+
+[node name="hall_closed3" parent="." instance=ExtResource("2_ff3ti")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 65, 45, 40)
+material_override = ExtResource("2_3wban")
+
+[node name="hall_closed5" parent="." instance=ExtResource("2_ff3ti")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 40, 45, 40)
+material_override = ExtResource("2_3wban")
+
+[node name="hall_closed6" parent="." instance=ExtResource("2_ff3ti")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 15, 45, 40)
+material_override = ExtResource("2_3wban")
+
+[node name="hall_closed7" parent="." instance=ExtResource("2_ff3ti")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10, 45, 40)
+material_override = ExtResource("2_3wban")
+
+[node name="hall_closed" parent="hall_closed7" instance=ExtResource("2_ff3ti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 3.8147e-06)
+material_override = ExtResource("2_3wban")
+
+[node name="hall_closed2" parent="hall_closed7" instance=ExtResource("2_ff3ti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -15)
+material_override = ExtResource("2_3wban")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="hall_closed7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 16.5, 4.95911e-05)
+operation = 2
+size = Vector3(4, 15, 4)
+
+[node name="u_closed" parent="." instance=ExtResource("7_nhgfl")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -67.5, 45, 40)
+material_override = ExtResource("2_3wban")

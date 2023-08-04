@@ -1,0 +1,365 @@
+[gd_scene load_steps=32 format=3 uid="uid://bbb1botr0fjcs"]
+
+[ext_resource type="Script" path="res://player/scripts/player.gd" id="1_emfij"]
+[ext_resource type="Script" path="res://player/scripts/state_manager.gd" id="2_vvtob"]
+[ext_resource type="Script" path="res://player/scripts/states/idle.gd" id="3_d5o0x"]
+[ext_resource type="Texture2D" uid="uid://b1hs584rdrvqk" path="res://player/shadow.png" id="3_xkin7"]
+[ext_resource type="Script" path="res://player/scripts/states/move.gd" id="4_1hn07"]
+[ext_resource type="Texture2D" uid="uid://cwjdrwumuf0l1" path="res://player/health_bar_front.png" id="4_vgfia"]
+[ext_resource type="Script" path="res://player/scripts/states/fall.gd" id="5_q4a3q"]
+[ext_resource type="Script" path="res://player/scripts/states/dash.gd" id="6_8lbkn"]
+[ext_resource type="Script" path="res://player/scripts/states/grab.gd" id="7_5lkag"]
+[ext_resource type="Script" path="res://player/scripts/states/jump.gd" id="8_aa486"]
+[ext_resource type="Script" path="res://player/scripts/states/dead.gd" id="9_1403a"]
+[ext_resource type="Script" path="res://player/scripts/camera_controller.gd" id="10_ov0wl"]
+[ext_resource type="Script" path="res://player/scripts/fps.gd" id="11_w4jgm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hgln5"]
+radius = 0.1
+
+[sub_resource type="LabelSettings" id="LabelSettings_tnaje"]
+font_size = 40
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rvabc"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4h7a4"]
+radius = 0.025
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8y56"]
+transparency = 4
+distance_fade_mode = 1
+distance_fade_min_distance = 0.5
+distance_fade_max_distance = 0.7
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_himp0"]
+height = 1.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xygkf"]
+size = Vector3(3, 1.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cpx6f"]
+size = Vector3(3, 1.5, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0iu8o"]
+height = 1.2
+
+[sub_resource type="Animation" id="Animation_6f6ue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/visuals:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/Area3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body/Area3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.5, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("body/Area3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ixatx"]
+resource_name = "squish"
+length = 0.025
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/visuals:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.5, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_aviyk"]
+resource_name = "swing_weapon1"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/Area3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.418879, 0), Vector3(0, 1.8326, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/Area3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.5, 1, 0), Vector3(-0.5, 1, 0), Vector3(0, 1, 0.5), Vector3(0.5, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body/Area3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_jmb6r"]
+resource_name = "unsquish"
+length = 0.025
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/visuals:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0.5, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bj0fy"]
+_data = {
+"RESET": SubResource("Animation_6f6ue"),
+"squish": SubResource("Animation_ixatx"),
+"swing_weapon1": SubResource("Animation_aviyk"),
+"unsquish": SubResource("Animation_jmb6r")
+}
+
+[sub_resource type="Curve" id="Curve_udm5c"]
+_data = [Vector2(0, 0.210526), 0.0, 0.0, 0, 0, Vector2(0.314159, 0.547368), 1.85855, 1.85855, 0, 0, Vector2(0.513274, 1), 2.37895, 0.0, 0, 0, Vector2(0.699115, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_jvf1q"]
+curve = SubResource("Curve_udm5c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iwv6r"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+gravity = Vector3(0, 1, 0)
+scale_curve = SubResource("CurveTexture_jvf1q")
+
+[sub_resource type="SphereMesh" id="SphereMesh_fgh7j"]
+radial_segments = 6
+rings = 3
+
+[node name="player" type="CharacterBody3D"]
+platform_wall_layers = 1
+script = ExtResource("1_emfij")
+
+[node name="state_manager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_vvtob")
+
+[node name="idle" type="Node" parent="state_manager"]
+script = ExtResource("3_d5o0x")
+
+[node name="move" type="Node" parent="state_manager"]
+script = ExtResource("4_1hn07")
+
+[node name="fall" type="Node" parent="state_manager"]
+script = ExtResource("5_q4a3q")
+
+[node name="dash" type="Node" parent="state_manager"]
+script = ExtResource("6_8lbkn")
+
+[node name="grab" type="Node" parent="state_manager"]
+script = ExtResource("7_5lkag")
+
+[node name="jump" type="Node" parent="state_manager"]
+script = ExtResource("8_aa486")
+
+[node name="dead" type="Node" parent="state_manager"]
+script = ExtResource("9_1403a")
+
+[node name="camera_controller" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+script = ExtResource("10_ov0wl")
+
+[node name="camera_yaw" type="Node3D" parent="camera_controller"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+top_level = true
+
+[node name="camera_pitch" type="SpringArm3D" parent="camera_controller/camera_yaw"]
+unique_name_in_owner = true
+collision_mask = 2
+shape = SubResource("SphereShape3D_hgln5")
+spring_length = 5.0
+
+[node name="camera" type="Camera3D" parent="camera_controller/camera_yaw/camera_pitch"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+fov = 80.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="camera_controller/camera_yaw/camera_pitch/camera"]
+offset_right = 1000.0
+offset_bottom = 127.0
+scale = Vector2(0.75, 0.75)
+alignment = 1
+
+[node name="fps" type="RichTextLabel" parent="camera_controller/camera_yaw/camera_pitch/camera/VBoxContainer"]
+layout_mode = 2
+text = "100"
+fit_content = true
+script = ExtResource("11_w4jgm")
+
+[node name="health_bar" type="TextureProgressBar" parent="camera_controller/camera_yaw/camera_pitch/camera/VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+value = 5.0
+texture_progress = ExtResource("4_vgfia")
+
+[node name="coin_counter" type="Label" parent="camera_controller/camera_yaw/camera_pitch/camera/VBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_tnaje")
+
+[node name="CenterContainer" type="CenterContainer" parent="camera_controller/camera_yaw/camera_pitch/camera"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="camera_controller/camera_yaw/camera_pitch/camera/CenterContainer"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="camera_controller/camera_yaw/camera_pitch/camera/CenterContainer/Control"]
+position = Vector2(-37, 4.5)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("3_xkin7")
+
+[node name="body" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="visuals" type="Node3D" parent="body"]
+
+[node name="face" type="Node3D" parent="body/visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+
+[node name="eye1" type="MeshInstance3D" parent="body/visuals/face"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0.425)
+mesh = SubResource("SphereMesh_rvabc")
+
+[node name="eye2" type="MeshInstance3D" parent="body/visuals/face"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0.425265)
+mesh = SubResource("SphereMesh_rvabc")
+
+[node name="mouth" type="MeshInstance3D" parent="body/visuals/face"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.169469, 0.484348)
+mesh = SubResource("CapsuleMesh_4h7a4")
+
+[node name="mesh" type="MeshInstance3D" parent="body/visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+layers = 2
+material_override = SubResource("StandardMaterial3D_q8y56")
+mesh = SubResource("CapsuleMesh_himp0")
+skeleton = NodePath("../../..")
+
+[node name="Area3D" type="Area3D" parent="body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="body/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.5)
+shape = SubResource("BoxShape3D_xygkf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="body/Area3D"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.5, 0, 0.5)
+mesh = SubResource("BoxMesh_cpx6f")
+skeleton = NodePath("../../..")
+
+[node name="collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("CapsuleShape3D_0iu8o")
+
+[node name="shadow" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.89293, 0)
+size = Vector3(1.2, 20, 1.2)
+texture_albedo = ExtResource("3_xkin7")
+upper_fade = 0.454723
+lower_fade = 3.11744
+cull_mask = 1048573
+
+[node name="label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77521, 0)
+visible = false
+pixel_size = 0.002
+billboard = 1
+fixed_size = true
+text = "sdf"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_bj0fy")
+}
+
+[node name="dash_particles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.3
+fixed_fps = 75
+visibility_aabb = AABB(-4, -2, -4, 8, 4, 8)
+process_material = SubResource("ParticleProcessMaterial_iwv6r")
+draw_pass_1 = SubResource("SphereMesh_fgh7j")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]

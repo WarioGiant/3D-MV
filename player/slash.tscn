@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvdrtoaighdb4"]
+
+[ext_resource type="Texture2D" uid="uid://pgcfisg6a1fy" path="res://player/slash.png" id="1_7o8w8"]
+[ext_resource type="Shader" path="res://player/slash.gdshader" id="1_i57f7"]
+[ext_resource type="ArrayMesh" uid="uid://kqyui0miri04" path="res://player/slash1.obj" id="2_fvi48"]
+[ext_resource type="Script" path="res://player/slash.gd" id="3_wle0e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dt26"]
+render_priority = 0
+shader = ExtResource("1_i57f7")
+shader_parameter/slash_texture = ExtResource("1_7o8w8")
+
+[node name="slash" type="MeshInstance3D"]
+material_override = SubResource("ShaderMaterial_6dt26")
+mesh = ExtResource("2_fvi48")
+script = ExtResource("3_wle0e")

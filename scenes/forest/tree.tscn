@@ -1,29 +1,64 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://cwctjkl4di2g8"]
 
 [ext_resource type="ArrayMesh" uid="uid://d3mwsectsv5w8" path="res://assets/forest/tree/leaves.obj" id="1_16w1u"]
 [ext_resource type="Shader" path="res://assets/foliage.gdshader" id="1_klssl"]
 [ext_resource type="ArrayMesh" uid="uid://c218upawo2mjh" path="res://assets/forest/tree/tree.obj" id="1_o433v"]
-[ext_resource type="Texture2D" uid="uid://bwv8wxhsox1di" path="res://assets/forest/tree/leaves.png" id="3_84vga"]
+[ext_resource type="Texture2D" uid="uid://merxmideo6ka" path="res://assets/forest/tree/leaf.png" id="2_q50i1"]
+[ext_resource type="Script" path="res://scenes/forest/foliage_effect.gd" id="5_5blox"]
+[ext_resource type="PackedScene" uid="uid://jrxl48bjejyx" path="res://components/particle_effects/tree_particles.tscn" id="6_387p7"]
+
+[sub_resource type="Gradient" id="Gradient_qu2nu"]
+offsets = PackedFloat32Array(0.661538, 0.779487, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.310617, 0.310617, 0.310617, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q0ky7"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_i4jn0"]
+seamless = true
+color_ramp = SubResource("Gradient_qu2nu")
+noise = SubResource("FastNoiseLite_q0ky7")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1qqs5"]
 render_priority = 0
 shader = ExtResource("1_klssl")
 shader_parameter/albedo = Color(0.94902, 0.105882, 0.0470588, 1)
-shader_parameter/inflate = 1.0
-shader_parameter/size = 2.1
-shader_parameter/alpha_mask = ExtResource("3_84vga")
+shader_parameter/inflate = 0.4
+shader_parameter/size = 2.3
+shader_parameter/wind_dir = Vector3(1, 0, 0)
+shader_parameter/wind_speed = 0.64
+shader_parameter/wind_size = 1.0
+shader_parameter/noise = SubResource("NoiseTexture3D_i4jn0")
+shader_parameter/alpha_mask = ExtResource("2_q50i1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yx1ia"]
 albedo_color = Color(0.333333, 0.129412, 0, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dsssl"]
+points = PackedVector3Array(4.9807, 5.29904, 2.49972, 4.61483, 6.73047, 2.48556, 4.79418, 6.45531, 3.81485, 4.92151, 5.71586, 3.7673, 4.73768, 3.25945, 2.26097, 4.79238, 3.65328, 1.56598, 4.58614, 5.18853, 1.10973, 4.41666, 7.16731, 3.27362, 4.10639, 6.76533, 1.17144, 4.03734, 7.31045, 1.99795, 2.91105, 8.50158, 1.2726, 4.38258, 6.50426, 4.55435, 4.8417, 6.01624, 4.1497, 4.53233, 4.79397, 3.98177, 4.30188, 2.61271, 1.90386, 4.4319, 3.08219, 1.31105, 4.39962, 3.95365, 3.52956, 3.91718, 2.32494, 2.46026, 4.14764, 3.63622, 0.539166, 4.41486, 4.42387, 0.73947, 3.90552, 5.19076, 0.112256, 3.31368, 6.06148, -0.40469, 3.42398, 6.90476, 0.118326, 3.89386, 7.64569, 2.81029, 3.35224, 8.14483, 2.46735, 2.8994, 8.23829, 3.18156, 2.30845, 9.01778, 1.58823, 2.82945, 7.49291, 0.00704575, -0.0221338, 8.78935, -2.03241, -0.803182, 9.59035, -1.63079, 2.94154, 7.0479, 4.55536, 3.71452, 6.09486, 5.21394, 4.45611, 5.92353, 4.60392, 2.34163, 7.86448, 3.96254, 3.90463, 5.2538, 5.02476, 3.78984, 4.54476, 4.65754, 3.53966, 2.05349, 1.77235, 3.96112, 2.40875, 1.49516, 3.91718, 2.61049, 1.11479, 3.34866, 3.0681, 3.79664, 3.12627, 2.29379, 2.91044, 3.64637, 3.08886, 0.445084, -0.666879, 4.11385, -3.88371, 3.60871, 4.36602, -0.110304, 3.06798, 5.28718, -0.7011, 1.13464, 6.01401, -2.49271, 1.43773, 6.45902, -2.15078, 2.80165, 6.91366, -0.638379, 1.16065, 8.7886, 2.23062, -0.837257, 9.62002, -1.11182, 1.01538, 7.18289, -2.30151, 0.332969, 7.83927, -2.38345, -0.257973, 8.14409, -2.61309, -0.924239, 8.397, -2.83565, -1.37978, 8.45634, -3.04607, -0.769106, 8.96364, -2.31871, -1.45869, 8.95845, -2.68897, -1.63624, 9.28775, -2.21552, -1.80034, 9.42496, -1.649, -1.89001, 9.4791, -1.07642, 2.52636, 6.30401, 5.3151, 2.01254, 5.67581, 5.75011, 3.03839, 5.46369, 5.5761, 3.84096, 5.66395, 5.12593, 0.0666418, 7.54111, 4.17701, 1.72469, 7.41503, 4.40362, 1.50499, 6.59993, 5.17347, 2.24927, 5.26641, 5.81384, 1.46195, 4.49507, 5.65501, 1.19652, 2.04311, 3.06623, -2.39039, 2.67798, -1.83009, -2.1958, 2.85227, -2.49777, -1.95547, 3.19641, -3.0572, -0.852501, 3.82979, -3.69554, 2.39454, 3.02953, 4.1416, 0.732012, 2.29008, 3.89982, -1.30355, 3.97664, -3.92721, -1.04709, 4.2785, -4.0395, -0.931413, 5.55714, -4.07997, 0.568808, 5.68545, -2.97121, 0.0774026, 6.23874, -3.32427, 0.492586, 6.69709, -2.87106, -0.384411, 7.86968, 3.32218, -0.353922, 6.68893, -3.48007, -0.0230308, 7.24741, -2.97526, -1.58423, 8.15967, -3.28179, -1.98417, 8.33544, -3.31315, -1.92588, 8.77155, -2.75573, -2.33927, 8.44373, -2.90343, -2.46571, 8.93249, -1.8574, -3.11315, 8.34657, -1.33337, -2.69079, 8.64769, -0.765845, -0.572723, 7.63086, 3.69851, 1.76683, 6.11933, 5.49214, 1.3382, 5.37395, 5.83104, 1.57583, 4.969, 5.90286, 0.363458, 6.18831, 5.17246, 0.883558, 6.38411, 5.17954, 1.0378, 4.70348, 5.78653, 0.0756092, 2.23001, 3.37478, -2.54731, 2.70468, -1.20793, -2.83964, 2.94795, -1.93024, -2.51593, 3.10295, -2.65052, -2.85937, 3.71632, -3.30404, -2.15365, 3.75192, -3.73702, -1.61113, 3.59913, -3.5438, 0.821684, 4.41349, 5.54171, 0.340143, 2.89603, 4.27211, -1.8111, 4.13165, -4.07288, -2.55449, 5.16777, -4.37638, -2.20835, 5.68842, -4.431, -1.94561, 6.31217, -4.26206, -2.00659, 7.13839, -3.9181, -2.16531, 7.85336, -3.55594, -2.44867, 7.37276, -3.7522, -2.97415, 7.98834, -2.76282, -2.62443, 8.44966, -2.51294, -2.9338, 8.49416, -1.91001, -3.44135, 7.74507, -1.47197, -3.2091, 8.0588, -0.751682, -0.738617, 6.98857, 3.62162, -3.53909, 7.40613, -0.941869, -4.0027, 5.6009, -0.804287, 0.568808, 5.74034, 5.43953, 0.107891, 5.24564, 4.92663, -0.274114, 2.92273, 3.51641, -3.93993, 4.19099, -1.43555, -3.63145, 3.71632, -1.48815, -3.1813, 3.29505, -2.03444, -3.58393, 3.82312, -2.69807, -3.07817, 4.51287, -3.7876, -2.67285, 4.11237, -3.73601, -2.76522, 4.80287, -4.14168, -0.0992522, 3.38108, 3.93321, -3.16426, 5.25899, -4.16798, -2.8244, 5.58459, -4.41279, -2.54731, 6.02291, -4.38649, -2.96788, 6.27434, -4.21856, -3.45838, 6.78906, -3.15837, -3.50322, 7.25038, -2.23474, -3.72651, 6.97819, -1.63788, -4.06098, 6.07038, -1.34652, -3.74892, 6.56953, -2.51598, -4.17935, 5.47111, -1.65406, -4.03677, 5.05355, -1.21198, -3.69153, 5.17667, -0.447179, -3.76776, 4.58704, -0.922648, -3.96952, 4.20582, -2.083, -3.73547, 4.74205, -3.28583, -3.43597, 5.07358, -3.85032, -3.73278, 5.63502, -3.67228, -3.30953, 6.22762, -3.81087, -3.95248, 6.34257, -1.82907, -4.04484, 5.75295, -2.14369, -3.9202, 5.37099, -3.11183)
 
 [node name="tree" type="Node3D"]
 
 [node name="leaves" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_1qqs5")
 extra_cull_margin = 3.0
+gi_mode = 2
 mesh = ExtResource("1_16w1u")
 skeleton = NodePath("../tree")
 
 [node name="tree" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_yx1ia")
 mesh = ExtResource("1_o433v")
+
+[node name="FoliageEffect" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 0)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("5_5blox")
+particles = ExtResource("6_387p7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FoliageEffect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.5, 0)
+shape = SubResource("ConvexPolygonShape3D_dsssl")
+
+[connection signal="body_entered" from="FoliageEffect" to="FoliageEffect" method="_on_body_entered_or_exited"]
+[connection signal="body_exited" from="FoliageEffect" to="FoliageEffect" method="_on_body_entered_or_exited"]

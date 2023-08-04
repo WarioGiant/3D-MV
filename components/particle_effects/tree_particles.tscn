@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=3 uid="uid://jrxl48bjejyx"]
+
+[ext_resource type="Texture2D" uid="uid://bwv8wxhsox1di" path="res://assets/forest/tree/leaves.png" id="1_8gshl"]
+[ext_resource type="Script" path="res://components/particle_effects/tree_particles.gd" id="1_kko4h"]
+[ext_resource type="AudioStream" uid="uid://dp3xm6nho8243" path="res://assets/forest/tree/leaf.ogg" id="3_0l8ii"]
+
+[sub_resource type="Curve" id="Curve_ttjrn"]
+max_value = 50.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.163717, 50), 0.0, 0.0, 0, 0, Vector2(0.973, 50), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_n5ayv"]
+curve = SubResource("Curve_ttjrn")
+
+[sub_resource type="Curve" id="Curve_y4y3v"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.132743, 1), 0.0, 0.0, 0, 0, Vector2(0.526549, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_aer44"]
+curve = SubResource("Curve_y4y3v")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8meiq"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+angular_velocity_min = 2.0
+angular_velocity_max = 5.0
+angular_velocity_curve = SubResource("CurveTexture_n5ayv")
+damping_min = 5.0
+damping_max = 5.0
+scale_curve = SubResource("CurveTexture_aer44")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f7q3u"]
+transparency = 1
+cull_mode = 2
+shading_mode = 2
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("1_8gshl")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w80jb"]
+material = SubResource("StandardMaterial3D_f7q3u")
+
+[node name="TreeParticles" type="GPUParticles3D"]
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.95
+visibility_aabb = AABB(-2, -2, -2, 4, 4, 4)
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_8meiq")
+draw_pass_1 = SubResource("PlaneMesh_w80jb")
+script = ExtResource("1_kko4h")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_0l8ii")
+autoplay = true

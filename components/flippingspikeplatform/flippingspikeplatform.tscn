@@ -1,0 +1,132 @@
+[gd_scene load_steps=13 format=3 uid="uid://drekca3rqy8gn"]
+
+[ext_resource type="Script" path="res://components/flippingspikeplatform/flippingspikeplatform.gd" id="1_i4ump"]
+[ext_resource type="ArrayMesh" uid="uid://cqa5nt1vvidg6" path="res://components/flippingspikeplatform/flippingspikeplatform.obj" id="1_lpbl3"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="3_ugvrb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q25si"]
+size = Vector3(6, 1, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_66mv4"]
+size = Vector3(6, 0.5, 6)
+
+[sub_resource type="Animation" id="Animation_u3nle"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_swqku"]
+resource_name = "flip"
+length = 8.0
+loop_mode = 1
+step = 0.05
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 1, 0, 0, -4.37114e-08, 3.95, 1, 1, 0, 0, -4.37114e-08, 4.5, 1, 1.19209e-07, 0, 0, 1)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatableBody3D/MeshInstance3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.5, -2.05196e-08, 3, 1, 0, 0.5, -2.05196e-08, 3.05, 1, 0, 1, 0, 3.1, 1, 0, 0.5, -2.05196e-08, 3.15, 1, 0, 1, 0, 3.2, 1, 0, 0.5, -2.05196e-08, 3.25, 1, 0, 1, 0, 3.3, 1, 0, 0.5, -2.05196e-08, 3.35, 1, 0, 1, 0, 3.4, 1, 0, 1, 0, 3.45, 1, 0, 0.5, -2.05196e-08, 3.5, 1, 0, 1, 0, 3.55, 1, 0, 0.5, -2.05196e-08, 3.6, 1, 0, 1, 0, 3.65, 1, 0, 0.5, -2.05196e-08, 3.7, 1, 0, 1, 0, 3.75, 1, 0, 0.5, -2.05196e-08, 3.8, 1, 0, 1, 0, 3.85, 1, 0, 0.5, -2.05196e-08, 3.9, 1, 0, 1, 0, 3.95, 1, 0, 0.5, -2.05196e-08, 6.95, 1, 0, 0.5, 0, 7, 1, 0, 1, 0, 7.05, 1, 0, 0.5, 0, 7.1, 1, 0, 1, 0, 7.15, 1, 0, 0.5, 0, 7.2, 1, 0, 1, 0, 7.25, 1, 0, 0.5, 0, 7.3, 1, 0, 1, 0, 7.35, 1, 0, 0.5, 0, 7.4, 1, 0, 1, 0, 7.45, 1, 0, 0.5, 0, 7.5, 1, 0, 1, 0, 7.55, 1, 0, 0.5, 0, 7.6, 1, 0, 1, 0, 7.65, 1, 0, 0.5, 0, 7.7, 1, 0, 1, 0, 7.75, 1, 0, 0.5, 0, 7.8, 1, 0, 1, 0, 7.85, 1, 0, 0.5, 0, 7.9, 1, 0, 1, 0, 7.95, 1, 0, 0.5, 0, 8, 1, 0, 1, 0)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles3D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_htua6"]
+_data = {
+"RESET": SubResource("Animation_u3nle"),
+"flip": SubResource("Animation_swqku")
+}
+
+[sub_resource type="Curve" id="Curve_7mb1m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.47411, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vpbsk"]
+curve = SubResource("Curve_7mb1m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fm26u"]
+emission_shape = 3
+emission_box_extents = Vector3(3, 0.5, 3)
+direction = Vector3(0, 1, 0)
+spread = 180.0
+gravity = Vector3(0, -0.3, 0)
+initial_velocity_max = 3.0
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_vpbsk")
+
+[sub_resource type="SphereMesh" id="SphereMesh_1jt26"]
+radius = 0.4
+height = 0.8
+radial_segments = 8
+rings = 8
+
+[node name="FlippingPlatformSpikes" type="Node3D"]
+script = ExtResource("1_i4ump")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+shape = SubResource("BoxShape3D_q25si")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2.05196e-08)
+mesh = ExtResource("1_lpbl3")
+
+[node name="Hitbox" type="Area3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2.05196e-08)
+script = ExtResource("3_ugvrb")
+reset_to_checkpoint = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D/Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_66mv4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_htua6")
+}
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+visibility_range_end = 75.0
+visibility_range_end_margin = 20.0
+emitting = false
+amount = 150
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-4.5, -1.5, -4.5, 9, 3, 9)
+process_material = SubResource("ParticleProcessMaterial_fm26u")
+draw_pass_1 = SubResource("SphereMesh_1jt26")
+
+[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+strength = -20.0
+attenuation = 0.158259
+size = Vector3(7, 2, 7)

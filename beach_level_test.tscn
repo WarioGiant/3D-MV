@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfggjsq5i3u8m"]
+
+[ext_resource type="PackedScene" uid="uid://bbb1botr0fjcs" path="res://player/player.tscn" id="1_53kck"]
+[ext_resource type="PackedScene" uid="uid://b6lysdpwgnfoi" path="res://assets/beach/beach_temple.blend" id="2_j7fn0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jja2q"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_pblgl"]
+sky_material = SubResource("ProceduralSkyMaterial_jja2q")
+
+[sub_resource type="Environment" id="Environment_5cghx"]
+background_mode = 2
+sky = SubResource("Sky_pblgl")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="beach_level" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.0348782, 0.498782, 0, 0.997564, 0.0697565, -0.5, 0.0604109, -0.863916, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5cghx")
+
+[node name="player" parent="." instance=ExtResource("1_53kck")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="beach_temple" parent="." instance=ExtResource("2_j7fn0")]

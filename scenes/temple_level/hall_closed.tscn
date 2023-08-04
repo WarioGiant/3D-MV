@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b7ls673onqk0m"]
+
+[node name="hall_closed" type="CSGCombiner3D"]
+use_collision = true
+collision_layer = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0)
+size = Vector3(25, 15, 10)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0)
+operation = 2
+size = Vector3(25, 12, 7)
